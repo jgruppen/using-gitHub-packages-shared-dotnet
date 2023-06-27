@@ -22,8 +22,11 @@ jobs:
 
     - name: Build and Publish Package
       run: dotnet build --configuration Release 
+    
+    - name: Prep packages
+      run: dotnet nuget add source --username jgruppen --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/jgruppen/index.json"
           
     - name: Publish to GitHub Packages
-      run: dotnet nuget push **/*.nupkg --source "https://api.nuget.org/v3/index.json"
+      run: dotnet nuget push **/*.nupkg --api-key ${{ secrets.GITHUB_TOKEN }} --source "github"
       env:
         DOTNET_CLI_APIKEY: ${{ secrets.GITHUB_TOKEN }}
