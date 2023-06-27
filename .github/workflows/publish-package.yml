@@ -1,0 +1,29 @@
+name: Publish Package
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+        run:
+            working-directory: ./Rubicon.Demo.Shared            
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '7.0.x'
+
+    - name: Build and Publish Package
+      run: dotnet build --configuration Release --no-restore
+          
+    - name: Publish to GitHub Packages
+      run: dotnet nuget push **/*.nupkg --source "github"
+      env:
+        DOTNET_CLI_APIKEY: ${{ secrets.GITHUB_TOKEN }}
