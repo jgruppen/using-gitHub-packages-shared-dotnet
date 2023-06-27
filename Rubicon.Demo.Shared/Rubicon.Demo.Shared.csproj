@@ -8,7 +8,7 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     
     <PackageId>Rubicon.Demo.Shared</PackageId>
-	  <Version>1.0.4</Version>
+	  <Version>1.0.5</Version>
 	  <Authors>Jarno Gruppen</Authors>
     <Company>Jarno's Company</Company>	  
     <PackageDescription>Rubicon shared demo project</PackageDescription>
